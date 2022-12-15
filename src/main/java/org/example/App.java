@@ -20,8 +20,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App 
+/**
+ * Represents the text UI of this Music Manager. User can generate music playlist with existing songs or search for new songs.
+ */
+public class App
 {
+    /**
+     * Start running Music Manager.
+     */
     public static void startApp() {
         System.out.println("Welcome to Music Manager! Please login.");
         System.out.println("Please enter User ID and password.(For testing, enter 'test' and 'test')");
@@ -73,7 +79,7 @@ public class App
             if (c1.equals("1")){
                 System.out.printf(">> Artist name (for test, enter 'coldplay'): ");
                 Scanner artist = new Scanner(System.in);
-                String a1 = artist.nextLine().strip();
+                String a1 = artist.nextLine();
                 ArrayList<Song> search = new ArrayList<>();
                 search = searchSongWithArtist(a1);
                 if (search.size() == 0) {
@@ -103,7 +109,7 @@ public class App
             } else if (c1.equals("2")) {
                 System.out.printf(">> Artist name (for test, enter 'coldplay'): ");
                 Scanner artist2 = new Scanner(System.in);
-                String a2 = artist2.nextLine().strip();
+                String a2 = artist2.nextLine();
                 System.out.printf(">> Song title (for test, enter 'yellow'): ");
                 Scanner song2 = new Scanner(System.in);
                 String s2 = song2.nextLine();
@@ -158,6 +164,10 @@ public class App
             // Edit here, prompt the user to try again.
         }
     }
+
+    /**
+     * Let users in the database login the application.
+     */
     private static boolean login(String id, String pw){
         Connection connection = null;
         try {
@@ -196,7 +206,9 @@ public class App
         return true;
     }
 
-
+    /**
+     * Let users search songs with Artist name from audioDB database.
+     */
     protected static ArrayList<Song> searchSongWithArtist(String artist){
         ArrayList<Song> result = new ArrayList<>();
         System.out.println("Searching songs with artist name " + artist);
@@ -256,6 +268,9 @@ public class App
         }
     }
 
+    /**
+     * Let users search songs with Artist name and Song title from audioDB database.
+     */
     protected static ArrayList<Song> searchSongWithArtistAndTitle(String artist,String song){
         System.out.println("searing song with artist name and song title: " + artist + ", " + song);
         ArrayList<Song> result = new ArrayList<>();
@@ -324,6 +339,9 @@ public class App
     }
     */
 
+    /**
+     * Let users generate song playlists from the music.db database.
+     */
     protected static void generatePlaylist(String s) {
         System.out.println("Generating Playlist " + s + " songs.");
         Connection connection = null;
@@ -446,6 +464,9 @@ public class App
             }
         }
     }
+    /**
+     * Let users add new songs into music.db database.
+     */
     protected static void addSong(Song s) {
         Connection connection = null;
         try {
@@ -473,6 +494,9 @@ public class App
         }
     }
 
+    /**
+     * Start the application.
+     */
     public static void main( String[] args )
     {
         startApp();

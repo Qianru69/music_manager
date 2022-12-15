@@ -10,19 +10,37 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Represent a playlist that include a list of songs.
+ */
 public class Playlist {
+    /**
+     * The list of songs in this playlist.
+     */
     private ArrayList<Song> songList;
-
+    /**
+     * Get the list of songs in this playlist.
+     */
     public ArrayList<Song> getSongList() {
         return songList;
     }
-
+    /**
+     * Set the list of songs in this playlist.
+     */
     public void setSongList(ArrayList<Song> songList) {
         this.songList = songList;
     }
-
+    /**
+     * Create a new playlist that has an empty list of songs.
+     */
     public Playlist() {songList = new ArrayList<Song>();}
+    /**
+     * Add a song into this playlist.
+     */
     public void addSong (Song s) { songList.add(s);}
+    /**
+     * Delete a song from this playlist
+     */
     public void deleteSong(Song s) {
         if (songList.contains(s)){
             songList.remove(s);
@@ -30,7 +48,9 @@ public class Playlist {
             System.out.printf("%s is not in the playlist\n", s.toString());
         }
     }
-
+    /**
+     * Merge two playlists.
+     */
     public void merge(Playlist other) {
         // Merge two playlists.
         Set<Song> songs = new HashSet<Song>(this.songList);
@@ -44,6 +64,9 @@ public class Playlist {
         this.songList = new ArrayList<>(songs);
     }
 
+    /**
+     * Sort the songs in this playlist based on how much the users like the songs.
+     */
     public void sort() {
         // Sort the playlist so that the songs that are the most liked are in the front
         ArrayList<Song> sortedSongs = new ArrayList<Song>();
@@ -68,6 +91,9 @@ public class Playlist {
         this.songList = sortedSongs;
     }
 
+    /**
+     * Shuffle the songs in this playlist randomly.
+     */
     public void shuffle() {
         // Randomly shuffle the playlist.
         Random r = new Random();
@@ -85,6 +111,10 @@ public class Playlist {
         }
     }
 
+    /**
+     * Generate a new playlist that include songs that user like >= 8.0
+     */
+
     public void likedMostPlaylist() {
         ArrayList<Song> likedMost = new ArrayList<Song>();
         for (Song s : this.songList) {
@@ -95,6 +125,9 @@ public class Playlist {
         this.songList = likedMost;
         this.shuffle();
     }
+    /**
+     * Create a XML file based on the songs in this playlist.
+     */
     public String toXML(){
         StringBuilder XML = new StringBuilder();
         XML.append("<songs>");
@@ -116,7 +149,9 @@ public class Playlist {
         }
         return XML.toString();
     }
-
+    /**
+     * Create a JSON file based on the songs in this playlist.
+     */
     public String toJSON(){
         StringBuilder JSON = new StringBuilder();
         JSON.append("{" + "\"songs\": [");

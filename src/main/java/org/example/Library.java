@@ -23,20 +23,38 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Represent a music library that has songs.
+ */
 public class Library {
+    /**
+     * The songs in this music library.
+     */
     private ArrayList<Song> songs;
-    public  Library() { songs = new ArrayList<Song>(); }
-
+    /**
+     * Create a new Library with a list of songs.
+     */
+    public Library() { songs = new ArrayList<Song>(); }
+    /**
+     * Find if a song is in this Library or not.
+     */
     public boolean findSong(Song s) {
         return songs.contains(s);
     }
-
+    /**
+     * Get songs from this music library.
+     */
     public ArrayList<Song> getSongs() {
         return songs;
     }
+    /**
+     * Add a song into this Library.
+     */
 
     public void addSong (Song s) { songs.add(s); }
-
+    /**
+     * Read songs from a XML file.
+     */
     public void readFromXML(String filename) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -80,7 +98,9 @@ public class Library {
             //Exception: file does not exist or xml is not well formatted
         }
     }
-
+    /**
+     * Read songs from a JSON file.
+     */
     public void readFromJSON(String filename) {
         String s;
         try {
@@ -116,9 +136,16 @@ public class Library {
         return s;
     }
 
+    /**
+     * Remove a song from this Library.
+     */
     public void removeSong(Song a) {
         this.songs.remove(a);
     }
+
+    /**
+     * Create a XML file based on the information in this music library.
+     */
     public String toXML(){
         StringBuilder XML = new StringBuilder();
         XML.append("<library>" + "<songs>");
@@ -159,7 +186,9 @@ public class Library {
         }
         return XML.toString();
     }
-
+    /**
+     * Create a JSON file based on the information in this music library.
+     */
     public String toJSON(){
         StringBuilder JSON = new StringBuilder();
         JSON.append("{" + "\"songs\": [");
@@ -204,5 +233,4 @@ public class Library {
         }
         return JSON.toString();
     }
-
 }
